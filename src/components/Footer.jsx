@@ -11,7 +11,7 @@ function Footer() {
           <a href="#instagram" className="hover:text-[#FFBF00]">Instagram</a>
         </div>
       </div>
-      <p className="mt-8 text-gray-400">&copy; 2024 THE BUILDERS COMPANY . All rights reserved.</p>
+      <p className="mt-8 text-gray-400">&copy; 2024 THE BUILDERS Construction . All rights reserved.</p>
     </footer>
   );
 }
