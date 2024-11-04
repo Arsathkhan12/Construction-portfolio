@@ -17,10 +17,10 @@ function App() {
       }}
     >
       <Navbar />
-      <Hero />
-      <About />
-      <Projects />
-      <JoinUs />
+      <section id="hero"><Hero /></section>
+      <section id="about"><About /></section>
+      <section id="projects"><Projects /></section>
+      <section id="JoinUs"><JoinUs /></section>
       <Footer />
     </div>
   );

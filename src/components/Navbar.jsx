@@ -1,14 +1,22 @@
-import React from 'react';
-import logoImage from '../assets/Logo.png'; // Make sure this path is correct
+import React, { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import logoImage from '../assets/Logo.png';
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <header className="flex justify-between items-center p-6 bg-opacity-90 bg-white">
+    <header className="flex justify-between items-center p-6 bg-opacity-60 bg-white relative">
       <a href="#home" className="flex items-center gap-2">
-        <img src={logoImage} alt="Logo" className="w-12 h-12" />
-        <span className="text-2xl font-bold text-[#FFBF00]">THE BUILDERS</span>
+        <img src={logoImage} alt="Logo" className="w-32 sm:w-40" />
       </a>
-      <nav className="flex gap-6">
+
+      {/* Desktop Menu */}
+      <nav className="hidden sm:flex gap-6">
         {['Home', 'About', 'Projects', 'Join Us', 'Contact'].map((item) => (
           <a 
             key={item} 
@@ -19,6 +27,28 @@ function Navbar() {
           </a>
         ))}
       </nav>
+
+      {/* Mobile Menu Button */}
+      <div className="sm:hidden">
+        <button onClick={toggleMenu} className="text-2xl">
+          {menuOpen ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {/* Mobile Menu - Shows as a vertical list when menuOpen is true */}
+      {menuOpen && (
+        <nav className="absolute top-full left-0 w-full bg-white flex flex-col items-center gap-4 py-4 shadow-lg sm:hidden">
+          {['Home', 'About', 'Projects', 'Join Us', 'Contact'].map((item) => (
+            <a 
+              key={item} 
+              href={`#${item.toLowerCase()}`} 
+              className="text-lg font-medium hover:text-[#FFBF00] transition-colors"
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
+      )}
     </header>
   );
 }
