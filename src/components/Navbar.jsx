@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import logoImage from '../assets/Logo.png';
 
@@ -9,8 +9,22 @@ function Navbar() {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    // Disable scrolling when the menu is open
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    // Cleanup when the component unmounts
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [menuOpen]);
+
   return (
-    <header className="flex justify-between items-center p-6 bg-opacity-60 bg-white relative">
+    <header className="fixed top-0 left-0 right-0 flex justify-between items-center p-6 bg-opacity-60 bg-white shadow-md z-50">
       <a href="#home" className="flex items-center gap-2">
         <img src={logoImage} alt="Logo" className="w-32 sm:w-40" />
       </a>
@@ -42,7 +56,8 @@ function Navbar() {
             <a 
               key={item} 
               href={`#${item.toLowerCase()}`} 
-              className="text-lg font-medium hover:text-[#FFBF00] transition-colors"
+              className="text-lg font-bold hover:text-[#FFBF00] transition-colors"
+              onClick={() => setMenuOpen(false)} // Close menu on link click
             >
               {item}
             </a>
